@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Sakshi 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+ margin:0; overflow:hidden; font-family:sans-serif;
+ background: radial-gradient(circle,#ff7eb3,#ff758c,#7873f5);
+ background-size:400% 400%; animation:bgmove 15s ease infinite;
+ color:white; text-align:center;
+}
+
+@keyframes bgmove{
+ 0%{background-position:0% 50%;}
+ 50%{background-position:100% 50%;}
+ 100%{background-position:0% 50%;}
+}
+
+.slide{
+ position:absolute; width:100%; height:100vh; top:0; left:100%;
+ display:flex; flex-direction:column; justify-content:center; align-items:center;
+ transition:1s ease;
+}
+.slide.active{ left:0; }
+
+#girl{ width:220px; animation:enter 2s ease forwards; }
+@keyframes enter{
+ 0%{transform:translate(-300px,0) scale(0.8);}
+ 100%{transform:translate(0px,0) scale(1);}
+}
+
+#cake{ width:180px; animation:pop 2s infinite; }
+@keyframes pop{
+ 0%{transform:scale(1);}
+ 50%{transform:scale(1.3);}
+ 100%{transform:scale(1);}
+}
+
+.effect{ position:absolute; font-size:24px; animation:rise 4.5s ease infinite; }
+@keyframes rise{ 0%{transform:translateY(100vh);} 100%{transform:translateY(-20vh);} }
+
+#typed{ font-size:22px; max-width:450px; margin-top:20px; white-space:pre-wrap; text-shadow:0 0 15px #fff; }
+
+button{ padding:14px 30px; border:none; border-radius:30px; font-size:18px; background:white; color:#ff4d6d; cursor:pointer; margin-top:15px; }
+
+h1{ font-size:50px; text-shadow:0 0 20px #fff; }
+p{ font-size:20px; margin:10px; }
+</style>
+</head>
+
+<body>
+
+<audio id="bgmusic" loop>
+ <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b1f2a3d3.mp3">
+</audio>
+
+<!-- Slide 1 -->
+<div class="slide active" id="s1">
+ <h1>✨ Happy Birthday Sakshi ✨</h1>
+ <p>Tum meri life ki sabse cute surprise ho ❤️</p>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide" id="s2">
+ <img id="girl" src="https://i.imgur.com/0X5i0nM.png" alt="anime girl">
+ <p>Hello Kitty Girl aa gayi, tumhare liye cake banayegi 🎂</p>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide" id="s3">
+ <h1>🎂 Cake Time 🎂</h1>
+ <img id="cake" src="https://i.imgur.com/Yb7IW8N.png">
+ <p>Cake cut hote hi surprise khulega ✂️</p>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide" id="s4">
+ <h1>💖 Surprise Sakshi 💖</h1>
+ <div id="typed"></div>
+</div>
+
+<script>
+let currentSlide=1;
+function nextSlide(){
+ document.getElementById("s"+currentSlide).classList.remove("active");
+ currentSlide++;
+ if(currentSlide>4) return;
+ document.getElementById("s"+currentSlide).classList.add("active");
+ if(currentSlide==2){ document.getElementById("bgmusic").play(); hearts(); confettiBlast(); }
+ if(currentSlide==3){ hearts(); confettiBlast(); }
+ if(currentSlide==4){ showTypedMessage(); hearts(); confettiBlast(); }
+}
+
+// Auto slide after delay
+setTimeout(nextSlide,2000);
+setTimeout(nextSlide,6000);
+setTimeout(nextSlide,10000);
+setTimeout(nextSlide,14000);
+
+function hearts(){
+ for(let i=0;i<50;i++){
+   let h=document.createElement("div");
+   h.className="effect";
+   h.innerHTML="❤️";
+   h.style.left=Math.random()*100+"%";
+   h.style.animationDuration=(2+Math.random()*3)+"s";
+   document.body.appendChild(h);
+ }
+}
+
+function confettiBlast(){
+ for(let i=0;i<50;i++){
+   let c=document.createElement("div");
+   c.className="effect";
+   c.innerHTML="🎉";
+   c.style.left=Math.random()*100+"%";
+   c.style.animationDuration=(2+Math.random()*3)+"s";
+   document.body.appendChild(c);
+ }
+}
+
+function showTypedMessage(){
+ const msg = "Jab se tum meri life me ayi ho...\n" +
+ "Tum meri duniya ka sabse khoobsurat hissa ho 💖\n" +
+ "Main tumhare bina adhura hoon 😘\n\n" +
+ "Tumhare saare sapne poore ho,\n" +
+ "Aur hamesha khush raho 🌸\n\n" +
+ "Happy Birthday Sakshi 🎂💫\n" +
+ "Love You 😍❤️";
+ let idx = 0;
+ let target = document.getElementById("typed");
+ function typeIt(){
+   if(idx < msg.length){
+     target.textContent += msg.charAt(idx);
+     idx++;
+     setTimeout(typeIt, 50);
+   }
+ }
+ typeIt();
+}
+</script>
+
+</body>
+</html>
